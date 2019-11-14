@@ -20,27 +20,17 @@ describe('characters model', () => {
         })
     })
 
-    // describe('characters-route.js', () => {
-    //     describe('character route', () => {
-    //         it('should return a status code from the character route', async () => {
-    //             const expectedStatusCode = 200;
-    //             const response = await request(cServer).get('/characters')
-    //             expect(response.status).toBe(expectedStatusCode)
-    //         });
+    describe('remove()', () => {
+        it('should remove the specified character from the db', async () => {
+            const id = 1
+            await Characters.remove(id);
 
-    //         it('should return a JSON object fron the index route', async () => {
-    //             const expectedBody = 'characters';
-    //             const response = await request(cServer).get('/characters');
-        
-    //             expect(response.body).toEqual(expectedBody);
-    //         });
-        
-    //         it('should return a JSON object fron the index route', async () => {
-    //             const response = await request(cServer).get('/characters');
-    //             expect(response.type).toEqual('application/json');
-    //         });
-    //     })
-    // })
+            const characters = await db('characters');
+            expect(characters).toHaveLength(3);
+        })
+    })
+
+    
 });
 
 
