@@ -8,22 +8,28 @@ module.exports = {
   findById,
 };
 
-async function insert(character) {
-  return null;
-}
-
-async function update(id, changes) {
-  return null;
-}
-
-function remove(id) {
-  return null;
-}
-
 function getAll() {
   return db('characters');
 }
 
-function findById(id) {
+async function insert(character) {
+  const [id] = await db('characters').insert(character);
+
+  return findById(id)
+}
+async function update(id, changes) {
   return null;
+}
+
+async function remove(id) {
+  await db('characters')
+  
+  return findById(id)
+    .delete()
+}
+
+function findById(id) {
+  return db('characters')
+        .where({ id })
+        .first();
 }
